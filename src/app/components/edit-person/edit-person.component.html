@@ -1,0 +1,81 @@
+<form [formGroup]="personForm" (ngSubmit)="save()">
+  <div class="inputContainer">
+    First Name:
+    <div><input formControlName="firstName" /></div>
+  </div>
+
+  <div class="inputContainer">
+    Last Name:
+    <div><input formControlName="lastName" /></div>
+  </div>
+  <div class="inputContainer">
+    Email:
+    <div><input formControlName="email" /></div>
+  </div>
+
+  <ng-container formGroupName="address">
+    <h3>Address:</h3>
+    <div class="inputContainer">
+      City:
+      <div><input formControlName="city" /></div>
+    </div>
+    <div class="inputContainer">
+      Street:
+      <div><input formControlName="street" /></div>
+    </div>
+  </ng-container>
+  <h3>Children:</h3>
+  <div>
+    <ng-container
+      *ngFor="let childForm of childrenFormArray"
+      [formGroup]="childForm"
+    >
+      <div class="inputContainer">
+        Name:
+        <div><input formControlName="name" /></div>
+      </div>
+      <div class="inputContainer">
+        Age:
+        <div><input formControlName="age" /></div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="btnContainer">
+    <button [disabled]="personForm.invalid">Save</button>
+  </div>
+</form>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Person Value</th>
+      <th>Person Form Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre>{{ personToEdit | json }}</pre>
+      </td>
+      <td>
+        <pre>{{ personForm.value | json }}</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <div>
+  <div>First Name:</div>
+  <div>
+    <input [formControl]="firstNameControl">
+  </div>
+
+  <ul>
+    <li>Dirty: {{firstNameControl.dirty}}</li>
+    <li>Enabled: {{firstNameControl.enabled}}</li>
+    <li>Valid: {{firstNameControl.valid}}</li>
+    <li>Value: {{firstNameControl.value}}</li>
+    <li>Errors: {{firstNameControl.errors | json}}</li>
+
+  </ul>
+</div> -->
